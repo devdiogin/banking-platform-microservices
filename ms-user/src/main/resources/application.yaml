@@ -4,3 +4,14 @@ spring:
 
   profiles:
     active: dev
+
+service:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8081/eureka
+
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
