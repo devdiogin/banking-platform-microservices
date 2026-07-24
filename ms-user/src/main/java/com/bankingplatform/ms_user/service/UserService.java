@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class UserService {
 
         var user = userMapper.toEntity(dto);
         user.setStatus(StatusUser.PENDING_KYC);
-        user.setCreatedAt(Instant.now());
+        user.setCreatedAt(Instant.now(Clock.systemUTC()));
 
         return userMapper.toResponse(userRepository.save(user));
     }
