@@ -28,21 +28,20 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     
-    private static final String USER_NOT_FOUND = "Usuário não encontrado.";
+    private static final String USER_NOT_FOUND = "Usuï¿½rio nï¿½o encontrado.";
 
     @Transactional
     public UserResponseDto createUser(UserCreateRequestDto dto) {
         if (userRepository.existsByCpf(dto.cpf())) {
-            throw new DuplicateCpfException("CPF já cadastrado.");
+            throw new DuplicateCpfException("CPF jï¿½ cadastrado.");
         }
 
         if (userRepository.existsByEmail(dto.email())) {
-            throw new DuplicateEmailException("E-mail já cadastrado.");
+            throw new DuplicateEmailException("E-mail jï¿½ cadastrado.");
         }
 
         var user = userMapper.toEntity(dto);
         user.setStatus(StatusUser.PENDING_KYC);
-        user.setCreatedAt(Instant.now(Clock.systemUTC()));
 
         return userMapper.toResponse(userRepository.save(user));
     }
@@ -68,7 +67,7 @@ public class UserService {
                     .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         }
 
-        throw new IllegalArgumentException("Informe ao menos um parâmetro para busca");
+        throw new IllegalArgumentException("Informe ao menos um parï¿½metro para busca");
     }
 
     @Transactional(readOnly = true)

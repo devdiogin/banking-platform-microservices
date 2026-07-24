@@ -2,6 +2,7 @@ package com.bankingplatform.ms_user.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class UserEntity {
     @Column(nullable = false)
     private StatusUser status;
 
+    @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
 }
