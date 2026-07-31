@@ -1,0 +1,7 @@
+include:
+  - ./docker/postgres/docker-compose.yaml
+  - ./docker/rabbitmq/docker-compose.yaml
+
+networks:
+  banking-network:
+    driver: bridge
