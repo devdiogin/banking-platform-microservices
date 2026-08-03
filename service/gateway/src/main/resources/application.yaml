@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+
+
+server:
+  port:
+    8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+    registry-fetch-interval-seconds: 5 # Gateway consulta o Eureka a cada 5 segundos, em vez de esperar 30.
