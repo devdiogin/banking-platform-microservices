@@ -2,5 +2,17 @@ spring:
   application:
     name: ms-customer
 
-profiles:
-  active: dev
+  profiles:
+    active: dev
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+
+  instance:
+    instance-id: ${spring.application.name} ${random.int}
+    prefer-ip-address: true # eureka registra usando do endereço IP da máquina
