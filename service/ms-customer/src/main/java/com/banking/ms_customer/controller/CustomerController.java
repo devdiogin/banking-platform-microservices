@@ -3,6 +3,8 @@ package com.banking.ms_customer.controller;
 import com.banking.ms_customer.dto.CustomerCreateDto;
 import com.banking.ms_customer.dto.CustomerResponseDto;
 import com.banking.ms_customer.dto.CustomerSearchDto;
+import com.banking.ms_customer.dto.CustomerUpdateDto;
+import com.banking.ms_customer.model.Status;
 import com.banking.ms_customer.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,8 +46,28 @@ public class CustomerController {
     }
 
     @Operation(summary = "Buscar clientes")
-    @GetMapping("/search/{search}")
-    public ResponseEntity<List<CustomerResponseDto>> search(@PathVariable CustomerSearchDto search) {
-        return ResponseEntity.ok(customerService.search(search));
+    @GetMapping
+    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
+                                                            @PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(customerService.search(search, pageable));
+    }
+
+    @Operation(summary = "Atualizar Status do Cliente")
+    @PatchMapping("/{id}")
+    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, Status status) {
+        return ResponseEntity.ok(customerService.updateStatus(id, status));
+    }
+
+    @Operation(summary = "Atualizar Dados do Cliente")
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerResponseDto> update(@PathVariable UUID id, CustomerUpdateDto dto) {
+        return ResponseEntity.ok(customerService.update(id, dto));
+    }
+
+    @Operation(summary = "Inativar cliente")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable UUID id) {
+        customerService.deactivate(id);
     }
 }
