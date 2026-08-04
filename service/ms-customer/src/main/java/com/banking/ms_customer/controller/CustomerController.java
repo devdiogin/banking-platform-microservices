@@ -1,10 +1,6 @@
 package com.banking.ms_customer.controller;
 
-import com.banking.ms_customer.dto.CustomerCreateDto;
-import com.banking.ms_customer.dto.CustomerResponseDto;
-import com.banking.ms_customer.dto.CustomerSearchDto;
-import com.banking.ms_customer.dto.CustomerUpdateDto;
-import com.banking.ms_customer.model.Status;
+import com.banking.ms_customer.dto.*;
 import com.banking.ms_customer.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -54,7 +50,7 @@ public class CustomerController {
 
     @Operation(summary = "Atualizar Status do Cliente")
     @PatchMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, Status status) {
+    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, CustomerStatusUpdateDto status) {
         return ResponseEntity.ok(customerService.updateStatus(id, status));
     }
 

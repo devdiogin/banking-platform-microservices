@@ -1,13 +1,9 @@
 package com.banking.ms_customer.service;
 
-import com.banking.ms_customer.dto.CustomerCreateDto;
-import com.banking.ms_customer.dto.CustomerResponseDto;
-import com.banking.ms_customer.dto.CustomerSearchDto;
-import com.banking.ms_customer.dto.CustomerUpdateDto;
+import com.banking.ms_customer.dto.*;
 import com.banking.ms_customer.exception.CustomerConflictException;
 import com.banking.ms_customer.exception.CustomerNotFoundException;
 import com.banking.ms_customer.mapper.CustomerMapper;
-import com.banking.ms_customer.model.Status;
 import com.banking.ms_customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -62,7 +58,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerResponseDto updateStatus(UUID id, Status status) {
+    public CustomerResponseDto updateStatus(UUID id, CustomerStatusUpdateDto status) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
 
@@ -84,11 +80,6 @@ public class CustomerService {
     public void deactivate(UUID id) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
-
-        if (customer.getStatus() == Status.INACTIVE) {
-            return;
-        }
-
-        customer.setStatus(Status.INACTIVE);
+        customer.deactivate();
     }
 }

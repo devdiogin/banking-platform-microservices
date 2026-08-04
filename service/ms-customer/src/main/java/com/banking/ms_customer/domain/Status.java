@@ -1,8 +1,8 @@
-package com.banking.ms_customer.model;
+package com.banking.ms_customer.domain;
 
 public enum Status {
     ACTIVE,
     INACTIVE,
     PENDING_KYC,
-    BLOQUED
+    BLOCKED
 }

@@ -2,9 +2,9 @@ package com.banking.ms_customer.mapper;
 
 import com.banking.ms_customer.dto.CustomerCreateDto;
 import com.banking.ms_customer.dto.CustomerResponseDto;
+import com.banking.ms_customer.dto.CustomerStatusUpdateDto;
 import com.banking.ms_customer.dto.CustomerUpdateDto;
-import com.banking.ms_customer.model.CustomerEntity;
-import com.banking.ms_customer.model.Status;
+import com.banking.ms_customer.domain.CustomerEntity;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
@@ -21,5 +21,5 @@ public interface CustomerMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(CustomerUpdateDto dto, @MappingTarget CustomerEntity entity);
 
-    void updateStatus(Status status, @MappingTarget CustomerEntity entity);
+    void updateStatus(CustomerStatusUpdateDto status, @MappingTarget CustomerEntity entity);
 }

@@ -1,7 +1,7 @@
 package com.banking.ms_customer.repository;
 
-import com.banking.ms_customer.model.CustomerEntity;
-import com.banking.ms_customer.model.Status;
+import com.banking.ms_customer.domain.CustomerEntity;
+import com.banking.ms_customer.domain.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

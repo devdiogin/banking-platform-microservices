@@ -1,4 +1,4 @@
-package com.banking.ms_customer.model;
+package com.banking.ms_customer.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

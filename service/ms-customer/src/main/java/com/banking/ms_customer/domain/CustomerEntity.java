@@ -1,4 +1,4 @@
-package com.banking.ms_customer.model;
+package com.banking.ms_customer.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -56,5 +56,13 @@ public class CustomerEntity {
     @PreUpdate
     public void preUpdate() {
         updatedAt = LocalDateTime.now(CLOCK);
+    }
+
+    public void deactivate() {
+        if (this.status == Status.INACTIVE) {
+            return;
+        }
+
+        this.status = Status.INACTIVE;
     }
 }

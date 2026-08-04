@@ -1,6 +1,6 @@
 package com.banking.ms_customer.dto;
 
-import com.banking.ms_customer.model.Status;
+import com.banking.ms_customer.domain.Status;
 
 import java.time.LocalDate;
 
