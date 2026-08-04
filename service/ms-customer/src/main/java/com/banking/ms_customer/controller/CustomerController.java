@@ -29,10 +29,11 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.insert(dto));
     }
 
-    @Operation(summary = "Paginação de todos clientes")
+    @Operation(summary = "Buscar clientes")
     @GetMapping
-    public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
-        return ResponseEntity.ok(customerService.findAll(pageable));
+    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
+                                                            @PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(customerService.search(search, pageable));
     }
 
     @Operation(summary = "Buscar clientes por Id")
@@ -41,22 +42,15 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
-    @Operation(summary = "Buscar clientes")
-    @GetMapping
-    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
-                                                            @PageableDefault(size = 10) Pageable pageable) {
-        return ResponseEntity.ok(customerService.search(search, pageable));
-    }
-
     @Operation(summary = "Atualizar Status do Cliente")
     @PatchMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, CustomerStatusUpdateDto status) {
-        return ResponseEntity.ok(customerService.updateStatus(id, status));
+    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, @Valid CustomerStatusUpdateDto dto) {
+        return ResponseEntity.ok(customerService.updateStatus(id, dto.status()));
     }
 
     @Operation(summary = "Atualizar Dados do Cliente")
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> update(@PathVariable UUID id, CustomerUpdateDto dto) {
+    public ResponseEntity<CustomerResponseDto> update(@PathVariable UUID id, @Valid CustomerUpdateDto dto) {
         return ResponseEntity.ok(customerService.update(id, dto));
     }
 

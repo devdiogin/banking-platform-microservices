@@ -58,6 +58,13 @@ public class CustomerEntity {
         updatedAt = LocalDateTime.now(CLOCK);
     }
 
+    public void changeStatus(Status status) {
+        if (this.status == null) {
+            throw new IllegalArgumentException("Status não pode ser null");
+        }
+        this.status = status;
+    }
+
     public void deactivate() {
         if (this.status == Status.INACTIVE) {
             return;

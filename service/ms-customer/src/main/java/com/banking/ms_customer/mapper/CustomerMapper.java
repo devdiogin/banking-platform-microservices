@@ -20,6 +20,4 @@ public interface CustomerMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(CustomerUpdateDto dto, @MappingTarget CustomerEntity entity);
-
-    void updateStatus(CustomerStatusUpdateDto status, @MappingTarget CustomerEntity entity);
 }

@@ -1,5 +1,6 @@
 package com.banking.ms_customer.service;
 
+import com.banking.ms_customer.domain.Status;
 import com.banking.ms_customer.dto.*;
 import com.banking.ms_customer.exception.CustomerConflictException;
 import com.banking.ms_customer.exception.CustomerNotFoundException;
@@ -58,11 +59,11 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerResponseDto updateStatus(UUID id, CustomerStatusUpdateDto status) {
+    public CustomerResponseDto updateStatus(UUID id, Status status) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
 
-        customerMapper.updateStatus(status, customer);
+        customer.changeStatus(status);
 
         return customerMapper.toResponse(customer);
     }
