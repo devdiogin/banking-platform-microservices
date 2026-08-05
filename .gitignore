@@ -1,0 +1,15 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Docker volumes
+infra/docker/**/data/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Java
+**/target/
+**/build/
