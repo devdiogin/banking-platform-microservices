@@ -4,8 +4,8 @@ services:
     restart: unless-stopped
 
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
-      RABBITMQ_DEFAULT_PASSWORD: ${RABBITMQ_PASSWORD:-guest}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASSWORD: ${RABBITMQ_PASSWORD}
 
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
