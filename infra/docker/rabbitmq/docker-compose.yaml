@@ -19,7 +19,7 @@ services:
       - "15672:15672"  # Management UI
 
     volumes:
-      - ./data:/var/lib/rabbitmq
+      - ./rabbitmq_data:/var/lib/rabbitmq
 
     networks:
       - banking-network

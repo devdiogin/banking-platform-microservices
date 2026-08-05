@@ -19,8 +19,8 @@ services:
 
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://keycloak_postgres:5432/keycloak
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_DB_USERNAME: ${POSTGRES_USER_KEYCLOAK}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
 
       KC_HOSTNAME: ${KEYCLOAK_URL}
 
@@ -44,14 +44,14 @@ services:
 
     environment:
       POSTGRES_DB: keycloak
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER_KEYCLOAK}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
 
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./postgres_keycloak_data:/var/lib/postgresql/data
 
     healthcheck:
-      test: ["CMD-SHELL","pg_isready -U $${POSTGRES_USER} -d keycloak"]
+      test: ["CMD-SHELL","pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
