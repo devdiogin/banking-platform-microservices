@@ -3,9 +3,6 @@
 .env.*
 !.env.example
 
-# Docker volumes
-infra/docker/**/data/
-
 # IntelliJ
 .idea/
 *.iml
@@ -13,3 +10,7 @@ infra/docker/**/data/
 # Java
 **/target/
 **/build/
+
+# Operating system
+.DS_Store
+Thumbs.db

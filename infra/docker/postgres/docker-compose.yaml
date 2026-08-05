@@ -24,3 +24,6 @@ services:
 
     networks:
       - banking-network
+
+volumes:
+  postgres_customer_data:

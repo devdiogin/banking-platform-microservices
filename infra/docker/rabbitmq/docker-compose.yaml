@@ -23,3 +23,5 @@ services:
 
     networks:
       - banking-network
+volumes:
+  rabbitmq_data:

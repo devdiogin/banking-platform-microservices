@@ -1,7 +1,6 @@
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:26.7.0
-    container_name: keycloak_app
     restart: unless-stopped
 
     command:
@@ -22,7 +21,7 @@ services:
       KC_DB_USERNAME: ${POSTGRES_USER_KEYCLOAK}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
 
-      KC_HOSTNAME: ${KEYCLOAK_URL}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
 
       KC_HTTPS_CERTIFICATE_FILE: /etc/x509/https/tls.crt
       KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/x509/https/tls.key
@@ -39,7 +38,6 @@ services:
 
   keycloak_postgres:
     image: postgres:17-alpine
-    container_name: keycloak_postgres
     restart: unless-stopped
 
     environment:
@@ -48,7 +46,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
 
     volumes:
-      - ./postgres_keycloak_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
 
     healthcheck:
       test: ["CMD-SHELL","pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
