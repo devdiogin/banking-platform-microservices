@@ -17,7 +17,7 @@ services:
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
 
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://keycloak-postgres:5432/keycloak
+      KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak
       KC_DB_USERNAME: ${POSTGRES_USER_KEYCLOAK}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
 
@@ -35,8 +35,7 @@ services:
     networks:
       - banking-network
 
-
-  keycloak-postgres:
+  postgres-keycloak:
     image: postgres:17-alpine
     restart: unless-stopped
 
