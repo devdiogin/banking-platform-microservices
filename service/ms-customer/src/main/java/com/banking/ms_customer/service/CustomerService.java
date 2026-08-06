@@ -1,7 +1,11 @@
 package com.banking.ms_customer.service;
 
-import com.banking.ms_customer.domain.Status;
-import com.banking.ms_customer.dto.*;
+import com.banking.ms_customer.amqp.event.CustomerStatusUpdatedEvent;
+import com.banking.ms_customer.amqp.producer.CustomerEventProducer;
+import com.banking.ms_customer.dto.CustomerCreateDto;
+import com.banking.ms_customer.dto.CustomerResponseDto;
+import com.banking.ms_customer.dto.CustomerStatusUpdateDto;
+import com.banking.ms_customer.dto.CustomerUpdateDto;
 import com.banking.ms_customer.exception.CustomerConflictException;
 import com.banking.ms_customer.exception.CustomerNotFoundException;
 import com.banking.ms_customer.mapper.CustomerMapper;
@@ -20,6 +24,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final CustomerEventProducer producer;
 
     private static final String NOT_FOUND = "Cliente não encontrado";
 
@@ -38,12 +43,6 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
-    public Page<CustomerResponseDto> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable)
-                .map(customerMapper::toResponse);
-    }
-
-    @Transactional(readOnly = true)
     public CustomerResponseDto findById(UUID id) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
@@ -52,18 +51,29 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
-    public Page<CustomerResponseDto> search(CustomerSearchDto search, Pageable pageable) {
-        return customerRepository
-                .search(search.name(), search.legalDocument(), search.email(), search.dateOfBirth(), search.status(), pageable)
+    public Page<CustomerResponseDto> findAll(Pageable pageable) {
+        return customerRepository.findAll(pageable)
                 .map(customerMapper::toResponse);
     }
 
+//    @Transactional(readOnly = true)
+//    public Page<CustomerResponseDto> search(CustomerSearchDto search, Pageable pageable) {
+//        return customerRepository
+//                .search(search.name(), search.legalDocument(), search.email(), search.dateOfBirth(), search.status(), pageable)
+//                .map(customerMapper::toResponse);
+//    }
+
     @Transactional
-    public CustomerResponseDto updateStatus(UUID id, Status status) {
+    public CustomerResponseDto updateStatus(UUID id, CustomerStatusUpdateDto dto) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
 
-        customer.changeStatus(status);
+        customer.setStatus(dto.status());
+
+        producer.publishCustomerStatusUpdated(
+                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(),
+                        customer.getLegalDocument(), customer.getEmail(), customer.getStatus())
+        );
 
         return customerMapper.toResponse(customer);
     }
@@ -83,4 +93,5 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
         customer.deactivate();
     }
+
 }

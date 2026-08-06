@@ -1,16 +1,13 @@
-package com.banking.ms_customer.dto;
+package com.banking.ms_customer.amqp.event;
 
 import com.banking.ms_customer.domain.Status;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
-public record CustomerResponseDto(
+public record CustomerStatusUpdatedEvent(
         UUID id,
         String name,
         String legalDocument,
         String email,
-        LocalDate dateOfBirth,
-        Status status
-) {
-}
+        Status status)
+{}

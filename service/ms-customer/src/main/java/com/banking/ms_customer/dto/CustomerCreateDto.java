@@ -14,11 +14,11 @@ public record CustomerCreateDto(
         String name,
 
         @NotBlank(message = "Informe o CPF.")
-        @CPF
+        @CPF(message = "CPF Inválido")
         String legalDocument,
 
         @NotBlank(message = "Informe o E-mail")
-        @Email
+        @Email(message = "E-mail inválidp")
         String email,
 
         @NotNull(message = "Informe a Data de Nascimento.")

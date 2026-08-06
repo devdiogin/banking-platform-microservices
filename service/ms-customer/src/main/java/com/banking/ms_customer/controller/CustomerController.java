@@ -29,11 +29,17 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.insert(dto));
     }
 
-    @Operation(summary = "Buscar clientes")
+//    @Operation(summary = "Buscar clientes")
+//    @GetMapping
+//    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
+//                                                            @PageableDefault(size = 10) Pageable pageable) {
+//        return ResponseEntity.ok(customerService.search(search, pageable));
+//    }
+
+    @Operation(summary = "Buscar todos Cliente")
     @GetMapping
-    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
-                                                            @PageableDefault(size = 10) Pageable pageable) {
-        return ResponseEntity.ok(customerService.search(search, pageable));
+    public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(customerService.findAll(pageable));
     }
 
     @Operation(summary = "Buscar clientes por Id")
@@ -44,8 +50,8 @@ public class CustomerController {
 
     @Operation(summary = "Atualizar Status do Cliente")
     @PatchMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, @Valid CustomerStatusUpdateDto dto) {
-        return ResponseEntity.ok(customerService.updateStatus(id, dto.status()));
+    public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, @RequestBody @Valid CustomerStatusUpdateDto dto) {
+        return ResponseEntity.ok(customerService.updateStatus(id, dto));
     }
 
     @Operation(summary = "Atualizar Dados do Cliente")

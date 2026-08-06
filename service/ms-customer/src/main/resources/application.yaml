@@ -5,6 +5,21 @@ spring:
   profiles:
     active: dev
 
+  rabbitmq:
+    host: ${RABBITMQ_HOSTNAME}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
+
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 5s
+          multiplier: 2
+          max-interval: 5m
+
 server:
   port: 0
 
