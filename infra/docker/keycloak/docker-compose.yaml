@@ -4,13 +4,10 @@ services:
     restart: unless-stopped
 
     command:
-      - start
+      - start-dev
 
     ports:
-      - "8443:8443"
-
-    volumes:
-      - /etc/ssl/keycloak:/etc/x509/https:ro
+      - "8080:8080"
 
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_USER}
@@ -20,11 +17,6 @@ services:
       KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak
       KC_DB_USERNAME: ${POSTGRES_USER_KEYCLOAK}
       KC_DB_PASSWORD: ${POSTGRES_PASSWORD_KEYCLOAK}
-
-      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
-
-      KC_HTTPS_CERTIFICATE_FILE: /etc/x509/https/tls.crt
-      KC_HTTPS_CERTIFICATE_KEY_FILE: /etc/x509/https/tls.key
 
       KC_HEALTH_ENABLED: "true"
 
