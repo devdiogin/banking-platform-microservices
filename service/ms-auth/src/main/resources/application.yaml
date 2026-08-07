@@ -17,18 +17,21 @@ spring:
           multiplier: 2
           max-interval: 5m
 
-  security:
-    oauth2:
-      resource-server:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/Youtube
-            jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
+#  security:
+#    oath2:
+#      resource-server:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/banking
+#          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:808/eureka
+      defaultZone: http://localhost:8081/eureka
 
   instance:
     instance-id: ${spring.application.name} ${random.int}
     prefer-ip-address: true
+
+server:
+  port: 0

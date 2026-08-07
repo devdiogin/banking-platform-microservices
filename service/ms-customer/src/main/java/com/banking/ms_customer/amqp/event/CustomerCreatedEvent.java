@@ -4,7 +4,10 @@ import com.banking.ms_customer.domain.Status;
 
 import java.util.UUID;
 
-public record CustomerStatusUpdatedEvent(
+public record CustomerCreatedEvent(
         UUID id,
-        Status status)
-{}
+        String name,
+        String email,
+        Status status
+) {
+}

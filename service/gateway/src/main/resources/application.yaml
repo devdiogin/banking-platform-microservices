@@ -13,6 +13,13 @@ spring:
                 - Path=/ms-customer/**
               filters:
                 - StripPrefix=1
+
+            - id: ms-auth
+              uri: lb://MS-AUTH
+              predicates:
+                  - Path=/ms-auth/**
+              filters:
+                - StripPrefix=1
 server:
   port: 8082
 

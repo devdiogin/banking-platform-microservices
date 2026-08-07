@@ -1,5 +1,6 @@
 package com.banking.ms_customer.service;
 
+import com.banking.ms_customer.amqp.event.CustomerCreatedEvent;
 import com.banking.ms_customer.amqp.event.CustomerStatusUpdatedEvent;
 import com.banking.ms_customer.amqp.producer.CustomerEventProducer;
 import com.banking.ms_customer.dto.CustomerCreateDto;
@@ -39,6 +40,9 @@ public class CustomerService {
         var customer = customerMapper.toEntity(dto);
         customerRepository.save(customer);
 
+        producer.publishCustomerCreated(
+                new CustomerCreatedEvent(customer.getId(), customer.getName(), customer.getEmail(), customer.getStatus()));
+
         return customerMapper.toResponse(customer);
     }
 
@@ -71,8 +75,7 @@ public class CustomerService {
         customer.setStatus(dto.status());
 
         producer.publishCustomerStatusUpdated(
-                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(),
-                        customer.getLegalDocument(), customer.getEmail(), customer.getStatus())
+                new CustomerStatusUpdatedEvent(customer.getId(), customer.getStatus())
         );
 
         return customerMapper.toResponse(customer);
