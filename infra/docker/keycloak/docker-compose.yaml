@@ -29,7 +29,7 @@ services:
       KC_HEALTH_ENABLED: "true"
 
     depends_on:
-      keycloak_postgres:
+      postgres-keycloak:
         condition: service_healthy
 
     networks:
