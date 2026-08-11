@@ -18,7 +18,7 @@ public class AuthRabbitDeclaration {
     @Bean
     public Queue customerStatusUpdateQueue() {
         return QueueBuilder
-                .durable(AuthRabbitConstants.CUSTOMER_STATUS_UPDATE_QUEUE)
+                .durable(AuthRabbitConstants.CUSTOMER_STATUS_UPDATED_QUEUE)
                 .build();
     }
 
@@ -39,7 +39,8 @@ public class AuthRabbitDeclaration {
 
     @Bean
     public Binding customerCreatedBinding() {
-        return BindingBuilder.bind(customerCreatedQueue())
+        return BindingBuilder
+                .bind(customerCreatedQueue())
                 .to(customerExchange())
                 .with(AuthRabbitConstants.CUSTOMER_CREATED_ROUTING_KEY);
     }

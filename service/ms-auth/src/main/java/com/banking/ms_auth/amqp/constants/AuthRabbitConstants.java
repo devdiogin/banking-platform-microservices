@@ -9,6 +9,6 @@ public final class AuthRabbitConstants {
     public static final String CUSTOMER_CREATED_QUEUE = "auth.customer.created.queue";
     public static final String CUSTOMER_CREATED_ROUTING_KEY = "customer.created";
 
-    public static final String CUSTOMER_STATUS_UPDATE_QUEUE = "auth.customer.status.update.queue";
+    public static final String CUSTOMER_STATUS_UPDATED_QUEUE = "auth.customer.status.update.queue";
     public static final String CUSTOMER_STATUS_UPDATED_ROUTING_KEY = "customer.status.updated";
 }
