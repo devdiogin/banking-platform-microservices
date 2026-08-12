@@ -59,10 +59,10 @@ public class CustomerEntity {
     }
 
     public void deactivate() {
-        if (this.status == Status.INACTIVE) {
+        if (this.status == Status.BLOCKED) {
             return;
         }
 
-        this.status = Status.INACTIVE;
+        this.status = Status.BLOCKED;
     }
 }

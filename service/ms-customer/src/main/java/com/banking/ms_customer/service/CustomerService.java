@@ -75,7 +75,7 @@ public class CustomerService {
         customer.setStatus(dto.status());
 
         producer.publishCustomerStatusUpdated(
-                new CustomerStatusUpdatedEvent(customer.getId(), customer.getStatus())
+                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(), customer.getEmail(), customer.getStatus())
         );
 
         return customerMapper.toResponse(customer);

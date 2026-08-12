@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerStatusUpdatedConsumer {
 
-    @RabbitListener(queues = AuthRabbitConstants.CUSTOMER_STATUS_UPDATE_QUEUE)
+    @RabbitListener(queues = AuthRabbitConstants.CUSTOMER_STATUS_UPDATED_QUEUE)
     public void consume(CustomerStatusUpdateEvent event) {
-        System.out.println(event);
     }
 }

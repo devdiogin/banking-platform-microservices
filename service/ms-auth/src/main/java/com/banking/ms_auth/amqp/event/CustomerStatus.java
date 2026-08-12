@@ -2,7 +2,7 @@ package com.banking.ms_auth.amqp.event;
 
 public enum CustomerStatus {
     ACTIVE,
-    INACTIVE,
+    REJECTED,
     PENDING_KYC,
     BLOCKED
 }
