@@ -24,6 +24,12 @@ spring:
 #          issuer-uri: http://localhost:8080/realms/banking
 #          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
 
+keycloak:
+  server-url: ${KEYCLOAK_SERVER_URL}
+  realm: ${KEYCLOAK_REALM}
+  client-id: ${KEYCLOAK_CLIENT_ID}
+  client-secret: ${KEYCLOAK_CLIENT_SECRET}
+
 eureka:
   client:
     service-url:
