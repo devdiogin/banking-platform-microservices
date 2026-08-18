@@ -1,13 +1,11 @@
 package com.banking.ms_auth.service;
 
 import com.banking.ms_auth.amqp.event.CustomerCreatedEvent;
-import com.banking.ms_auth.config.KeycloakConfig;
 import com.banking.ms_auth.exception.UserNotCreatedException;
 import com.banking.ms_auth.exception.UserNotFoundException;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
-import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,10 +24,15 @@ public class KeycloakUserService {
     public void createUser(CustomerCreatedEvent event) {
         String id = event.id().toString();
 
+        String[] names = event.name().trim().split("\\s+");
+        String firstName = names[0];
+        String lastName = names[names.length - 1];
+
         var user = new UserRepresentation();
         user.setUsername(id);
         user.setEmail(event.email());
-        user.setFirstName(event.name());
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
 
         user.setEnabled(false);
         user.setEmailVerified(false);
