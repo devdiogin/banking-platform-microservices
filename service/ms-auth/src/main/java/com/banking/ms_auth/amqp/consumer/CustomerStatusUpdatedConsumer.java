@@ -18,9 +18,8 @@ public class CustomerStatusUpdatedConsumer {
     public void consume(CustomerStatusUpdateEvent event) {
 
         if (event.status() == CustomerStatus.ACTIVE) {
-            String id = event.id().toString();
 
-            keycloakUserService.enableUser(id);
+            keycloakUserService.enableUser(event.legalDocument());
         }
     }
 }

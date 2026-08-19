@@ -29,13 +29,6 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.insert(dto));
     }
 
-//    @Operation(summary = "Buscar clientes")
-//    @GetMapping
-//    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto search,
-//                                                            @PageableDefault(size = 10) Pageable pageable) {
-//        return ResponseEntity.ok(customerService.search(search, pageable));
-//    }
-
     @Operation(summary = "Buscar todos Cliente")
     @GetMapping
     public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
@@ -46,6 +39,12 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> findById(@PathVariable UUID id) {
         return ResponseEntity.ok(customerService.findById(id));
+    }
+
+    @Operation(summary = "Buscar clientes por valores")
+    @GetMapping("/search")
+    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto dto, @PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(customerService.search(dto, pageable));
     }
 
     @Operation(summary = "Atualizar Status do Cliente")

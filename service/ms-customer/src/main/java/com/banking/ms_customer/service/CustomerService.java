@@ -3,10 +3,7 @@ package com.banking.ms_customer.service;
 import com.banking.ms_customer.amqp.event.CustomerCreatedEvent;
 import com.banking.ms_customer.amqp.event.CustomerStatusUpdatedEvent;
 import com.banking.ms_customer.amqp.producer.CustomerEventProducer;
-import com.banking.ms_customer.dto.CustomerCreateDto;
-import com.banking.ms_customer.dto.CustomerResponseDto;
-import com.banking.ms_customer.dto.CustomerStatusUpdateDto;
-import com.banking.ms_customer.dto.CustomerUpdateDto;
+import com.banking.ms_customer.dto.*;
 import com.banking.ms_customer.exception.CustomerConflictException;
 import com.banking.ms_customer.exception.CustomerNotFoundException;
 import com.banking.ms_customer.mapper.CustomerMapper;
@@ -41,7 +38,7 @@ public class CustomerService {
         customerRepository.save(customer);
 
         producer.publishCustomerCreated(
-                new CustomerCreatedEvent(customer.getId(), customer.getName(), customer.getEmail(), customer.getStatus()));
+                new CustomerCreatedEvent(customer.getName(), customer.getLegalDocument(), customer.getEmail(), customer.getStatus()));
 
         return customerMapper.toResponse(customer);
     }
@@ -60,12 +57,15 @@ public class CustomerService {
                 .map(customerMapper::toResponse);
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<CustomerResponseDto> search(CustomerSearchDto search, Pageable pageable) {
-//        return customerRepository
-//                .search(search.name(), search.legalDocument(), search.email(), search.dateOfBirth(), search.status(), pageable)
-//                .map(customerMapper::toResponse);
-//    }
+    @Transactional(readOnly = true)
+    public Page<CustomerResponseDto> search(CustomerSearchDto dto, Pageable pageable) {
+        String name = dto.name() != null ? dto.name().toLowerCase() : null;
+        String email = dto.email() != null ? dto.email().toLowerCase() : null;
+
+        return customerRepository
+                .search(name, dto.legalDocument(), email, dto.dateOfBirth(), dto.status(), pageable)
+                .map(customerMapper::toResponse);
+    }
 
     @Transactional
     public CustomerResponseDto updateStatus(UUID id, CustomerStatusUpdateDto dto) {
@@ -96,5 +96,4 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
         customer.deactivate();
     }
-
 }

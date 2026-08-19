@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.UUID;
 
 @Entity
@@ -51,18 +52,19 @@ public class CustomerEntity {
     public void prePersist() {
         createdAt = LocalDateTime.now(CLOCK);
         updatedAt = createdAt;
+        email = email.trim().toLowerCase(Locale.ROOT);
     }
 
     @PreUpdate
     public void preUpdate() {
         updatedAt = LocalDateTime.now(CLOCK);
+        email = email.trim().toLowerCase(Locale.ROOT);
     }
 
     public void deactivate() {
         if (this.status == Status.BLOCKED) {
             return;
         }
-
         this.status = Status.BLOCKED;
     }
 }

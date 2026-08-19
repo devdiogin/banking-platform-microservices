@@ -22,14 +22,13 @@ public class KeycloakUserService {
     private String realm;
 
     public void createUser(CustomerCreatedEvent event) {
-        String id = event.id().toString();
 
         String[] names = event.name().trim().split("\\s+");
         String firstName = names[0];
         String lastName = names[names.length - 1];
 
         var user = new UserRepresentation();
-        user.setUsername(id);
+        user.setUsername(event.legalDocument());
         user.setEmail(event.email());
         user.setFirstName(firstName);
         user.setLastName(lastName);
