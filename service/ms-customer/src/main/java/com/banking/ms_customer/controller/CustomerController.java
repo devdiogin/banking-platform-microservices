@@ -32,6 +32,7 @@ public class CustomerController {
 
     @Operation(summary = "Buscar todos Cliente")
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(customerService.findAll(pageable));
     }
@@ -50,18 +51,21 @@ public class CustomerController {
 
     @Operation(summary = "Atualizar Status do Cliente")
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, @RequestBody @Valid CustomerStatusUpdateDto dto) {
         return ResponseEntity.ok(customerService.updateStatus(id, dto));
     }
 
     @Operation(summary = "Atualizar Dados do Cliente")
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CUSTOMER, ADMIN')")
     public ResponseEntity<CustomerResponseDto> update(@PathVariable UUID id, @Valid CustomerUpdateDto dto) {
         return ResponseEntity.ok(customerService.update(id, dto));
     }
 
     @Operation(summary = "Inativar cliente")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}/deactivate")
     public void deactivate(@PathVariable UUID id) {
         customerService.deactivate(id);
