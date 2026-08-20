@@ -32,18 +32,20 @@ public class CustomerController {
 
     @Operation(summary = "Buscar todos Cliente")
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
     public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(customerService.findAll(pageable));
     }
 
     @Operation(summary = "Buscar clientes por Id")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE', 'SUPPORT')")
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> findById(@PathVariable UUID id) {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
     @Operation(summary = "Buscar clientes por valores")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE', 'SUPPORT')")
     @GetMapping("/search")
     public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto dto, @PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(customerService.search(dto, pageable));
@@ -51,7 +53,7 @@ public class CustomerController {
 
     @Operation(summary = "Atualizar Status do Cliente")
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
     public ResponseEntity<CustomerResponseDto> updateStatus(@PathVariable UUID id, @RequestBody @Valid CustomerStatusUpdateDto dto) {
         return ResponseEntity.ok(customerService.updateStatus(id, dto));
     }
@@ -65,7 +67,7 @@ public class CustomerController {
 
     @Operation(summary = "Inativar cliente")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
     @DeleteMapping("/{id}/deactivate")
     public void deactivate(@PathVariable UUID id) {
         customerService.deactivate(id);
