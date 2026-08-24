@@ -16,16 +16,16 @@ public class AuthRabbitDeclaration {
     }
 
     @Bean
-    public Queue customerStatusUpdateQueue() {
+    public Queue customerStatusUpdatedQueue() {
         return QueueBuilder
                 .durable(AuthRabbitConstants.CUSTOMER_STATUS_UPDATED_QUEUE)
                 .build();
     }
 
     @Bean
-    public Binding customerStatusUpdateBinding() {
+    public Binding customerStatusUpdatedBinding() {
         return BindingBuilder
-                .bind(customerStatusUpdateQueue())
+                .bind(customerStatusUpdatedQueue())
                 .to(customerExchange())
                 .with(AuthRabbitConstants.CUSTOMER_STATUS_UPDATED_ROUTING_KEY);
     }

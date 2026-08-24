@@ -1,4 +1,4 @@
-package com.banking.ms_customer.config;
+package com.banking.ms_account.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -13,8 +13,8 @@ public class OpenApiConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Banking Platform - Customer Service")
-                        .description("Microsserviço responsável pelo gerenciamento de clientes da plataforma bancária.")
+                        .title("Banking Platform - Account Service")
+                        .description("Microsserviço responsável pelo gerenciamento de contas da plataforma bancária.")
                         .version("v1")
                         .contact(new Contact()
                                 .name("Diogenes Cassimiro")

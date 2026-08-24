@@ -2,29 +2,29 @@ spring:
   application:
     name: ms-account
 
+  profiles:
+    active: dev
+
   security:
     oauth2:
       resource-server:
         jwt:
           issuer-uri: http://localhost:8080/realms/banking
 
-  profiles:
-    active: dev
-
   rabbitmq:
-      host: ${RABBITMQ_HOSTNAME}
-      port: ${RABBITMQ_PORT}
-      username: ${RABBITMQ_USER}
-      password: ${RABBITMQ_PASSWORD}
+    host: ${RABBITMQ_HOSTNAME}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
 
-      listener:
-        simple:
-          retry:
-            enabled: true
-            max-attempts: 3
-            initial-interval: 5s
-            multiplier: 2
-            max-interval: 5m
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 5s
+          multiplier: 2
+          max-interval: 5m
 
 server:
   port: 0

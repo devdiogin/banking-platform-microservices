@@ -38,7 +38,8 @@ public class CustomerService {
         customerRepository.save(customer);
 
         producer.publishCustomerCreated(
-                new CustomerCreatedEvent(customer.getName(), customer.getLegalDocument(), customer.getEmail(), customer.getStatus()));
+                new CustomerCreatedEvent(customer.getName(),
+                        customer.getLegalDocument(), customer.getEmail(), customer.getStatus()));
 
         return customerMapper.toResponse(customer);
     }

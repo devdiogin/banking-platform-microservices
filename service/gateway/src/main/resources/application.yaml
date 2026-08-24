@@ -26,6 +26,13 @@ spring:
                   - Path=/ms-auth/**
               filters:
                 - StripPrefix=1
+
+            - id: ms-account
+              uri: lb://MS-ACCOUNT
+              predicates:
+                - Path=/ms-account/**
+              filters:
+                - StripPrefix=1
 server:
   port: 8082
 
