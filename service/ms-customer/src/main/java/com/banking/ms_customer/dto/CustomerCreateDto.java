@@ -10,15 +10,15 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
 
 public record CustomerCreateDto(
-        @NotBlank(message = "Informe o Nome")
+        @NotBlank(message = "Informe o Nome.")
         String name,
 
         @NotBlank(message = "Informe o CPF.")
-        @CPF(message = "CPF Inválido")
+        @CPF(message = "Informe um CPF válido.")
         String legalDocument,
 
-        @NotBlank(message = "Informe o E-mail")
-        @Email(message = "E-mail inválidp")
+        @NotBlank(message = "Informe o e-mail.")
+        @Email(message = "Informe um e-mail válido.")
         String email,
 
         @NotNull(message = "Informe a Data de Nascimento.")
@@ -26,7 +26,7 @@ public record CustomerCreateDto(
         LocalDate dateOfBirth,
 
         @Valid
-        @NotNull(message = "Informe o endereço")
+        @NotNull(message = "Informe o endereço.")
         AddressDto address
 ) {
 }

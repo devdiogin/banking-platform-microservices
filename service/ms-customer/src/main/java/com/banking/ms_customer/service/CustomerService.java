@@ -75,10 +75,8 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
 
         if (dto.status() == Status.ACTIVE) {
-            return customerMapper.toResponse(customer);
+            customer.activate();
         }
-
-        customer.setStatus(dto.status());
 
         producer.publishCustomerStatusUpdated(
                 new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(), customer.getEmail(), customer.getStatus())
@@ -100,9 +98,7 @@ public class CustomerService {
     public void deactivate(UUID id) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
-        if (customer.getStatus() == Status.BLOCKED) {
-            return;
-        }
-        customer.setStatus(Status.BLOCKED);
+
+        customer.deactivate();
     }
 }

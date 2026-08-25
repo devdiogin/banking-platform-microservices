@@ -33,7 +33,7 @@ public class CustomerController {
     @Operation(summary = "Buscar todos Cliente")
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
-    public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
+    public ResponseEntity<Page<CustomerResponseDto>> findAll(@PageableDefault(size = 10, sort = "createdAt") Pageable pageable) {
         return ResponseEntity.ok(customerService.findAll(pageable));
     }
 
@@ -47,7 +47,8 @@ public class CustomerController {
     @Operation(summary = "Buscar clientes por valores")
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE', 'SUPPORT')")
     @GetMapping("/search")
-    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto dto, @PageableDefault(size = 10) Pageable pageable) {
+    public ResponseEntity<Page<CustomerResponseDto>> search(@ModelAttribute CustomerSearchDto dto,
+                                                            @PageableDefault(size = 10, sort = "createdAt") Pageable pageable) {
         return ResponseEntity.ok(customerService.search(dto, pageable));
     }
 
