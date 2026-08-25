@@ -6,6 +6,7 @@ import com.banking.ms_account.domain.AccountStatus;
 import com.banking.ms_account.domain.AccountType;
 import com.banking.ms_account.dto.AccountResponseDto;
 import com.banking.ms_account.dto.AccountUpdateStatusDto;
+import com.banking.ms_account.exception.AccountNotFoundException;
 import com.banking.ms_account.mapper.AccountMapper;
 import com.banking.ms_account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,14 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
+    private static final String ACCOUNT_NOT_FOUND = "Conta não encontrada";
+
     @Transactional
     public void insert(CustomerStatusUpdateEvent event) {
+        if (accountRepository.existsByCustomerId(event.id())) {
+            return;
+        }
+
         var account = AccountEntity.builder()
                 .customerId(event.id())
                 .accountNumber(generateAccountNumber())
@@ -46,7 +53,7 @@ public class AccountService {
     @Transactional(readOnly = true)
     public AccountResponseDto findById(UUID id) {
         var account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+                .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
 
         return accountMapper.toResponse(account);
     }
@@ -54,7 +61,7 @@ public class AccountService {
     @Transactional
     public AccountResponseDto updateStatus(UUID id, AccountUpdateStatusDto dto) {
         var account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Conta não encontrada"));
+                .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
 
         account.setStatus(dto.status());
         return accountMapper.toResponse(account);
@@ -65,9 +72,7 @@ public class AccountService {
         String accountNumber;
 
         do {
-            int number = ThreadLocalRandom
-                    .current()
-                    .nextInt(10_000_000, 100_000_000);
+            int number = ThreadLocalRandom.current().nextInt(10_000_000, 100_000_000);
 
             accountNumber = String.valueOf(number);
 

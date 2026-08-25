@@ -2,14 +2,14 @@ spring:
   application:
     name: ms-customer
 
+  profiles:
+    active: dev
+
   security:
     oauth2:
       resource-server:
         jwt:
           issuer-uri: http://localhost:8080/realms/banking
-
-  profiles:
-    active: dev
 
   rabbitmq:
     host: ${RABBITMQ_HOSTNAME}
@@ -37,4 +37,4 @@ eureka:
 
   instance:
     instance-id: ${spring.application.name} ${random.int}
-    prefer-ip-address: true # eureka registra usando do endereço IP da máquina
+    prefer-ip-address: true

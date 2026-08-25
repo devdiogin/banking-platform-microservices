@@ -48,6 +48,7 @@ public class AccountEntity {
     @Enumerated(EnumType.STRING)
     private AccountType type;
 
+    @Builder.Default
     @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal balance = BigDecimal.ZERO;
 

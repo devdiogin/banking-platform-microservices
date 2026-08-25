@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface AccountRepository extends JpaRepository<AccountEntity, UUID> {
 
     Boolean existsByAccountNumber(String account);
+    Boolean existsByCustomerId(UUID customerId);
 }

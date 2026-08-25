@@ -3,6 +3,7 @@ package com.banking.ms_customer.service;
 import com.banking.ms_customer.amqp.event.CustomerCreatedEvent;
 import com.banking.ms_customer.amqp.event.CustomerStatusUpdatedEvent;
 import com.banking.ms_customer.amqp.producer.CustomerEventProducer;
+import com.banking.ms_customer.domain.Status;
 import com.banking.ms_customer.dto.*;
 import com.banking.ms_customer.exception.CustomerConflictException;
 import com.banking.ms_customer.exception.CustomerNotFoundException;
@@ -73,6 +74,10 @@ public class CustomerService {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
 
+        if (dto.status() == Status.ACTIVE) {
+            return customerMapper.toResponse(customer);
+        }
+
         customer.setStatus(dto.status());
 
         producer.publishCustomerStatusUpdated(
@@ -95,6 +100,9 @@ public class CustomerService {
     public void deactivate(UUID id) {
         var customer = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(NOT_FOUND));
-        customer.deactivate();
+        if (customer.getStatus() == Status.BLOCKED) {
+            return;
+        }
+        customer.setStatus(Status.BLOCKED);
     }
 }

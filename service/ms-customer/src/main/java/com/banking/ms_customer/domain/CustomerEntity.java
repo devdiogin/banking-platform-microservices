@@ -60,11 +60,4 @@ public class CustomerEntity {
         updatedAt = LocalDateTime.now(CLOCK);
         email = email.trim().toLowerCase(Locale.ROOT);
     }
-
-    public void deactivate() {
-        if (this.status == Status.BLOCKED) {
-            return;
-        }
-        this.status = Status.BLOCKED;
-    }
 }
