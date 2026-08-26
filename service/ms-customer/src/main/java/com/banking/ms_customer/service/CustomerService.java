@@ -78,8 +78,12 @@ public class CustomerService {
             customer.activate();
         }
 
+        if (dto.status() == Status.REJECTED) {
+            customer.rejected();
+        }
+
         producer.publishCustomerStatusUpdated(
-                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(), customer.getEmail(), customer.getStatus())
+                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(), customer.getLegalDocument(), customer.getEmail(), customer.getStatus())
         );
 
         return customerMapper.toResponse(customer);

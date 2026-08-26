@@ -18,7 +18,6 @@ public class CustomerStatusUpdatedConsumer {
     public void consume(CustomerStatusUpdateEvent event) {
 
         if (event.status() == CustomerStatus.ACTIVE) {
-
             keycloakUserService.enableUser(event.legalDocument());
         }
     }

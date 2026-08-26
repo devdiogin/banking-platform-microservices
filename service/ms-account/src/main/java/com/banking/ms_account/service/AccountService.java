@@ -29,7 +29,7 @@ public class AccountService {
 
     @Transactional
     public void insert(CustomerStatusUpdateEvent event) {
-        if (accountRepository.existsByCustomerId(event.id())) {
+        if (Boolean.TRUE.equals(accountRepository.existsByCustomerId(event.id()))) {
             return;
         }
 

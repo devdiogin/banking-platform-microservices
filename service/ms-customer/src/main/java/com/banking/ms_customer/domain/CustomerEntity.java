@@ -74,4 +74,11 @@ public class CustomerEntity {
         }
         this.status = Status.BLOCKED;
     }
+
+    public void rejected() {
+        if (this.status == Status.REJECTED) {
+            return;
+        }
+        this.status = Status.REJECTED;
+    }
 }
