@@ -3,121 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Análise concluída - Spring Bank</title>
+
+    <style>
+        @media only screen and (max-width: 620px) {
+            .email-wrapper {
+                padding: 24px 16px !important;
+            }
+
+            .email-content {
+                padding: 32px 24px !important;
+            }
+
+            .email-header {
+                padding: 0 24px 24px !important;
+            }
+
+            .email-title {
+                font-size: 28px !important;
+                line-height: 34px !important;
+            }
+        }
+    </style>
 </head>
 
 <body style="
     margin: 0;
     padding: 0;
-    background-color: #F4F6F5;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #181818;
+    background-color: #071A14;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, Helvetica, sans-serif;
 ">
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0"
-       style="background-color: #F4F6F5; padding: 40px 16px;">
+<div style="
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: transparent;
+">
+    Concluímos a análise da sua solicitação de abertura de conta Spring Bank.
+</div>
 
+<table
+        role="presentation"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        style="background-color: #071A14;"
+>
     <tr>
-        <td align="center">
+        <td
+                align="center"
+                class="email-wrapper"
+                style="padding: 48px 20px;"
+        >
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                   style="
-                       max-width: 600px;
-                       background-color: #FFFFFF;
-                       border-radius: 16px;
-                       overflow: hidden;
-                   ">
+            <table
+                    role="presentation"
+                    width="100%"
+                    cellpadding="0"
+                    cellspacing="0"
+                    border="0"
+                    style="
+                    width: 100%;
+                    max-width: 580px;
+                "
+            >
 
-                <!-- Header -->
+                <!-- Marca -->
                 <tr>
-                    <td style="
-                        background-color: #12372A;
-                        padding: 32px 40px;
-                    ">
-                        <span style="
-                            color: #FFFFFF;
-                            font-size: 26px;
-                            font-weight: bold;
-                            letter-spacing: -0.5px;
-                        ">
-                            Spring Bank
-                        </span>
+                    <td
+                            class="email-header"
+                            style="padding: 0 8px 28px;"
+                    >
+
+                        <table
+                                role="presentation"
+                                cellpadding="0"
+                                cellspacing="0"
+                                border="0"
+                        >
+                            <tr>
+                                <td
+                                        width="34"
+                                        height="34"
+                                        align="center"
+                                        valign="middle"
+                                        style="
+                                        width: 34px;
+                                        height: 34px;
+                                        background-color: #0F6B46;
+                                        border-radius: 9px;
+                                        color: #FFFFFF;
+                                        font-size: 16px;
+                                        font-weight: 700;
+                                    "
+                                >
+                                    S
+                                </td>
+
+                                <td style="
+                                    padding-left: 11px;
+                                    color: #F4F7F5;
+                                    font-size: 17px;
+                                    font-weight: 650;
+                                    letter-spacing: -0.3px;
+                                ">
+                                    Spring Bank
+                                </td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
 
                 <!-- Conteúdo -->
                 <tr>
-                    <td style="padding: 48px 40px 24px 40px;">
+                    <td
+                            class="email-content"
+                            style="
+                            padding: 44px 40px;
+                            background-color: #0D241C;
+                            border: 1px solid #274238;
+                            border-radius: 18px;
+                        "
+                    >
 
                         <p style="
-                            margin: 0 0 16px 0;
-                            font-size: 16px;
+                            margin: 0 0 16px;
+                            color: #9BAAA3;
+                            font-size: 15px;
                             line-height: 24px;
-                            color: #66706B;
                         ">
                             {{saudacao}}, {{nome}}.
                         </p>
 
-                        <h1 style="
-                            margin: 0 0 24px 0;
-                            font-size: 32px;
-                            line-height: 40px;
-                            font-weight: 700;
-                            letter-spacing: -1px;
-                            color: #181818;
-                        ">
-                            Concluímos a análise da sua conta.
+                        <h1
+                                class="email-title"
+                                style="
+                                margin: 0 0 22px;
+                                color: #F4F7F5;
+                                font-size: 32px;
+                                line-height: 39px;
+                                font-weight: 650;
+                                letter-spacing: -1px;
+                            "
+                        >
+                            Concluímos sua análise.
                         </h1>
 
                         <p style="
-                            margin: 0 0 16px 0;
-                            font-size: 17px;
-                            line-height: 28px;
-                            color: #444A47;
+                            margin: 0 0 16px;
+                            color: #C2CCC7;
+                            font-size: 16px;
+                            line-height: 27px;
                         ">
                             Após analisarmos as informações fornecidas, neste momento
-                            não foi possível aprovar a abertura da sua conta no
-                            <strong>Spring Bank</strong>.
+                            não foi possível aprovar sua solicitação de abertura de
+                            conta no <strong style="color: #F4F7F5;">Spring Bank</strong>.
                         </p>
 
                         <p style="
-                            margin: 0 0 28px 0;
-                            font-size: 17px;
-                            line-height: 28px;
-                            color: #444A47;
+                            margin: 0 0 30px;
+                            color: #9BAAA3;
+                            font-size: 15px;
+                            line-height: 25px;
                         ">
-                            Essa decisão considera os critérios internos utilizados
+                            A decisão considera os critérios internos utilizados
                             em nosso processo de análise.
                         </p>
 
                         <!-- Status -->
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                               style="
-                                   background-color: #F5F5F4;
-                                   border-radius: 12px;
-                                   margin-bottom: 28px;
-                               ">
+                        <table
+                                role="presentation"
+                                width="100%"
+                                cellpadding="0"
+                                cellspacing="0"
+                                border="0"
+                                style="
+                                background-color: #12251F;
+                                border: 1px solid #31443C;
+                                border-radius: 12px;
+                                margin-bottom: 30px;
+                            "
+                        >
                             <tr>
                                 <td style="
-                                    padding: 20px 24px;
-                                    border-left: 4px solid #747A76;
+                                    padding: 18px 20px;
+                                    border-left: 3px solid #718078;
                                 ">
 
                                     <p style="
-                                        margin: 0 0 6px 0;
-                                        font-size: 13px;
-                                        line-height: 20px;
-                                        color: #777D79;
+                                        margin: 0 0 5px;
+                                        color: #718078;
+                                        font-size: 12px;
+                                        line-height: 18px;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.7px;
                                     ">
                                         Status da análise
                                     </p>
 
                                     <p style="
                                         margin: 0;
-                                        font-size: 17px;
+                                        color: #D7DEDA;
+                                        font-size: 16px;
                                         line-height: 24px;
-                                        font-weight: bold;
-                                        color: #3F4541;
+                                        font-weight: 600;
                                     ">
                                         Não aprovada
                                     </p>
@@ -127,101 +221,102 @@
                         </table>
 
                         <h2 style="
-                            margin: 0 0 12px 0;
-                            font-size: 19px;
-                            line-height: 28px;
-                            font-weight: 700;
-                            color: #181818;
+                            margin: 0 0 10px;
+                            color: #F4F7F5;
+                            font-size: 17px;
+                            line-height: 25px;
+                            font-weight: 600;
                         ">
-                            Você poderá tentar novamente.
+                            Você poderá solicitar novamente
                         </h2>
 
                         <p style="
-                            margin: 0 0 16px 0;
-                            font-size: 17px;
-                            line-height: 28px;
-                            color: #444A47;
+                            margin: 0 0 14px;
+                            color: #9BAAA3;
+                            font-size: 15px;
+                            line-height: 25px;
                         ">
-                            Uma nova solicitação de abertura de conta poderá ser
-                            realizada após <strong>3 meses</strong>.
+                            Uma nova solicitação poderá ser realizada após
+                            <strong style="color: #F4F7F5;">3 meses</strong>.
                         </p>
 
                         <p style="
                             margin: 0;
-                            font-size: 17px;
-                            line-height: 28px;
-                            color: #444A47;
+                            color: #9BAAA3;
+                            font-size: 15px;
+                            line-height: 25px;
                         ">
-                            Quando esse período terminar, ficaremos felizes em
-                            receber uma nova solicitação sua.
+                            Após esse período, você poderá passar novamente pelo
+                            processo de abertura de conta.
                         </p>
 
+                        <!-- Segurança -->
+                        <table
+                                role="presentation"
+                                width="100%"
+                                cellpadding="0"
+                                cellspacing="0"
+                                border="0"
+                                style="
+                                margin-top: 34px;
+                                border-top: 1px solid #274238;
+                            "
+                        >
+                            <tr>
+                                <td style="padding-top: 26px;">
+
+                                    <p style="
+                                        margin: 0 0 7px;
+                                        color: #F4F7F5;
+                                        font-size: 13px;
+                                        line-height: 20px;
+                                        font-weight: 600;
+                                    ">
+                                        Segurança e privacidade
+                                    </p>
+
+                                    <p style="
+                                        margin: 0;
+                                        color: #718078;
+                                        font-size: 13px;
+                                        line-height: 21px;
+                                    ">
+                                        Suas informações continuam sendo tratadas
+                                        de acordo com as políticas de segurança e
+                                        privacidade do Spring Bank.
+                                    </p>
+
+                                </td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
 
-                <!-- Informações -->
+                <!-- Footer -->
                 <tr>
-                    <td style="padding: 8px 40px 40px 40px;">
-
-                        <div style="
-                            border-top: 1px solid #E8ECEA;
-                            padding-top: 32px;
-                        ">
-
-                            <p style="
-                                margin: 0 0 8px 0;
-                                font-size: 14px;
-                                line-height: 22px;
-                                font-weight: bold;
-                                color: #252A27;
-                            ">
-                                Segurança e privacidade
-                            </p>
-
-                            <p style="
-                                margin: 0;
-                                font-size: 14px;
-                                line-height: 22px;
-                                color: #737B77;
-                            ">
-                                Suas informações continuam sendo tratadas de acordo
-                                com nossas políticas de segurança e privacidade.
-                            </p>
-
-                        </div>
-
-                    </td>
-                </tr>
-
-            </table>
-
-            <!-- Footer -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                   style="max-width: 600px;">
-
-                <tr>
-                    <td style="
-                        padding: 24px 16px;
-                        text-align: center;
-                    ">
+                    <td
+                            align="center"
+                            style="padding: 26px 20px 0;"
+                    >
 
                         <p style="
-                            margin: 0 0 8px 0;
+                            margin: 0 0 6px;
+                            color: #718078;
                             font-size: 12px;
                             line-height: 18px;
-                            font-weight: bold;
-                            color: #5D6963;
+                            font-weight: 600;
                         ">
                             Spring Bank
                         </p>
 
                         <p style="
                             margin: 0;
-                            font-size: 12px;
+                            color: #53645C;
+                            font-size: 11px;
                             line-height: 18px;
-                            color: #929A96;
                         ">
-                            Este é um e-mail automático. Por favor, não responda.
+                            Este é um e-mail automático. Não responda a esta mensagem.
                         </p>
 
                     </td>
@@ -231,7 +326,6 @@
 
         </td>
     </tr>
-
 </table>
 
 </body>
