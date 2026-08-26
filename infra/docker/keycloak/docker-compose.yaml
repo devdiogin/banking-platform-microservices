@@ -20,6 +20,9 @@ services:
 
       KC_HEALTH_ENABLED: "true"
 
+    volumes:
+      - ./themes:/opt/keycloak/themes
+
     depends_on:
       postgres-keycloak:
         condition: service_healthy

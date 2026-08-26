@@ -1,6 +1,5 @@
 # Environment
 infra/.env
-infra/.env.example
 !infra/.env.example
 
 # IntelliJ
