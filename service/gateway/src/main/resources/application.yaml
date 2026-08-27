@@ -33,6 +33,13 @@ spring:
                 - Path=/ms-account/**
               filters:
                 - StripPrefix=1
+
+            - id: ms-ai
+              uri: lb://MS-AI
+              predicates:
+                - Path=/ms-ai/**
+              filters:
+                - StripPrefix=1
 server:
   port: 8082
 
