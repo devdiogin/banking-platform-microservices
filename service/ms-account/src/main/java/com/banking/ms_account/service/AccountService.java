@@ -58,6 +58,15 @@ public class AccountService {
         return accountMapper.toResponse(account);
     }
 
+    @Transactional(readOnly = true)
+    public AccountResponseDto findByBalance(UUID customerId) {
+        var account = accountRepository.findByCustomerId(customerId)
+                .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
+
+        accountRepository.findByBalance(account.getBalance());
+        return accountMapper.toResponse(account);
+    }
+
     @Transactional
     public AccountResponseDto updateStatus(UUID id, AccountUpdateStatusDto dto) {
         var account = accountRepository.findById(id)
@@ -76,7 +85,7 @@ public class AccountService {
 
             accountNumber = String.valueOf(number);
 
-        } while (accountRepository.existsByAccountNumber(accountNumber));
+        } while (Boolean.TRUE.equals(accountRepository.existsByAccountNumber(accountNumber)));
             return accountNumber;
     }
 

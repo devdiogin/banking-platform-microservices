@@ -26,7 +26,7 @@ public class AccountController {
 
     @GetMapping
     @Operation(summary = "Buscar todas contas")
-//    @PreAuthorize("hasAnyRole('ADMIN', EMPLOYEE, 'SUPORTE')")
+    @PreAuthorize("hasAnyRole('ADMIN', EMPLOYEE, 'SUPORTE')")
     public ResponseEntity<Page<AccountResponseDto>> findAll(@PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(accountService.findAll(pageable));
     }
@@ -36,6 +36,13 @@ public class AccountController {
     @PreAuthorize("hasAnyRole('ADMIN', EMPLOYEE, 'SUPORTE')")
     public ResponseEntity<AccountResponseDto> findById(@PathVariable UUID id) {
         return ResponseEntity.ok(accountService.findById(id));
+    }
+
+    @GetMapping("/{customerId}/balance")
+    @Operation(summary = "Buscar valor disponível na conta")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
+    public ResponseEntity<AccountResponseDto> findByBalance(@PathVariable UUID customerId) {
+        return ResponseEntity.ok(accountService.findByBalance(customerId));
     }
 
     @PatchMapping("/{id}")

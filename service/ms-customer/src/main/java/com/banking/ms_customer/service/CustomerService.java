@@ -83,7 +83,7 @@ public class CustomerService {
         }
 
         producer.publishCustomerStatusUpdated(
-                new CustomerStatusUpdatedEvent(customer.getId(), customer.getName(), customer.getLegalDocument(), customer.getEmail(), customer.getStatus())
+                new CustomerStatusUpdatedEvent(customer.getId(), customer.getLegalDocument(), customer.getStatus())
         );
 
         return customerMapper.toResponse(customer);
