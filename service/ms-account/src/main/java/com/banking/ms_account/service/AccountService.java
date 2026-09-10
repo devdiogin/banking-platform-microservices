@@ -63,7 +63,7 @@ public class AccountService {
         var account = accountRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
 
-        accountRepository.findByBalance(account.getBalance());
+        accountRepository.findByBalance(customerId);
         return accountMapper.toResponse(account);
     }
 
@@ -82,7 +82,6 @@ public class AccountService {
 
         do {
             int number = ThreadLocalRandom.current().nextInt(10_000_000, 100_000_000);
-
             accountNumber = String.valueOf(number);
 
         } while (Boolean.TRUE.equals(accountRepository.existsByAccountNumber(accountNumber)));

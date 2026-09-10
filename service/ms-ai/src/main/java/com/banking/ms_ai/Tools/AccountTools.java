@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class BankingTools {
+public class AccountTools {
 
     private final AccountClient accountClient;
 
-    @Tool(description = "Consultar o saldo da conta bancária do cliente")
+    @Tool(description = "Consultar o saldo da conta bancária do cliente, retornar valor e nome do cliente")
     public AccountBalanceResponse getBalance(UUID customerId) {
         return accountClient.getBalance(customerId);
     }
