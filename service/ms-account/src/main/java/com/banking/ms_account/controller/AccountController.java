@@ -37,6 +37,13 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findById(id));
     }
 
+    @GetMapping("/customerId/{id}")
+    @Operation(summary = "Buscar contas pelo id do cliente")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE', 'SUPORTE')")
+    public ResponseEntity<AccountResponseDto> findByCustomerId(@PathVariable UUID id) {
+        return ResponseEntity.ok(accountService.findByCustomerId(id));
+    }
+
     @GetMapping("/{customerId}/balance")
     @Operation(summary = "Buscar valor disponível na conta")
     @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")

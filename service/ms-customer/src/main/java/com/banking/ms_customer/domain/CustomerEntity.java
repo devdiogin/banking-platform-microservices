@@ -37,7 +37,7 @@ public class CustomerEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status = Status.PENDING_KYC;
+    private Status status;
 
     @Embedded
     private Address address;
@@ -53,6 +53,7 @@ public class CustomerEntity {
         createdAt = LocalDateTime.now(CLOCK);
         updatedAt = createdAt;
         email = email.trim().toLowerCase(Locale.ROOT);
+        status = Status.PENDING_KYC;
     }
 
     @PreUpdate

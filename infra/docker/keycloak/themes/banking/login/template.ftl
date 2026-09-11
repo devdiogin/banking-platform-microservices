@@ -13,7 +13,7 @@
 
     <meta
         name="theme-color"
-        content="#071A14"
+        content="#F5F5F7"
     >
 
     <title>Spring Bank</title>

@@ -21,7 +21,7 @@
     style="
         margin: 0;
         padding: 0;
-        background-color: #071A14;
+        background-color: #F5F5F7;
         font-family: Arial, Helvetica, sans-serif;
     "
 >
@@ -34,7 +34,7 @@
     border="0"
     style="
         width: 100%;
-        background-color: #071A14;
+        background-color: #F5F5F7;
     "
 >
 
@@ -64,7 +64,7 @@
 <td
     style="
         padding-bottom: 32px;
-        color: #F4F7F5;
+        color: #1D1D1F;
         font-size: 18px;
         font-weight: 700;
     "
@@ -83,7 +83,7 @@
 
             text-align: center;
 
-            background-color: #0F6B46;
+            background-color: #820AD1;
             color: #FFFFFF;
 
             font-size: 15px;
@@ -109,11 +109,13 @@
 
         border:
             1px solid
-            #274238;
+            #E8E8ED;
 
-        border-radius: 18px;
+        border-radius: 24px;
 
-        background-color: #0D241C;
+        box-shadow: 0 12px 40px rgba(29, 29, 31, 0.08);
+
+        background-color: #FFFFFF;
     "
 >
 
@@ -124,7 +126,7 @@
             0
             18px;
 
-        color: #F4F7F5;
+        color: #1D1D1F;
 
         font-size: 30px;
         line-height: 1.15;
@@ -145,7 +147,7 @@
             0
             30px;
 
-        color: #9BAAA3;
+        color: #6E6E73;
 
         font-size: 15px;
         line-height: 1.7;
@@ -168,7 +170,7 @@
 <td
     style="
         border-radius: 12px;
-        background-color: #0F6B46;
+        background-color: #820AD1;
     "
 >
 
@@ -208,7 +210,7 @@
             0
             0;
 
-        color: #718078;
+        color: #86868B;
 
         font-size: 12px;
         line-height: 1.6;
@@ -227,7 +229,7 @@
             30px
             0;
 
-        background-color: #274238;
+        background-color: #E8E8ED;
     "
 ></div>
 
@@ -236,7 +238,7 @@
     style="
         margin: 0;
 
-        color: #718078;
+        color: #86868B;
 
         font-size: 12px;
         line-height: 1.6;
@@ -258,7 +260,7 @@
     style="
         padding-top: 28px;
 
-        color: #718078;
+        color: #86868B;
 
         font-size: 11px;
         line-height: 1.6;

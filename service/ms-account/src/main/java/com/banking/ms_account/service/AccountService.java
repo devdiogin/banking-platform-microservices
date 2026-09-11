@@ -59,6 +59,14 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
+    public AccountResponseDto findByCustomerId(UUID id) {
+        var account = accountRepository.findByCustomerId(id)
+                .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
+
+        return accountMapper.toResponse(account);
+    }
+
+    @Transactional(readOnly = true)
     public AccountResponseDto findByBalance(UUID customerId) {
         var account = accountRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
@@ -74,6 +82,15 @@ public class AccountService {
 
         account.setStatus(dto.status());
         return accountMapper.toResponse(account);
+    }
+
+    @Transactional
+    public void blockAccount(CustomerStatusUpdateEvent event) {
+        var account = accountRepository.findByCustomerId(event.id())
+                .orElseThrow(() -> new AccountNotFoundException(ACCOUNT_NOT_FOUND));
+
+        account.setStatus(AccountStatus.BLOCKED);
+        accountMapper.toResponse(account);
     }
 
 
