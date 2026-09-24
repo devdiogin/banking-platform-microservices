@@ -1,6 +1,6 @@
 package com.banking.ms_ai.service;
 
-import com.banking.ms_ai.Tools.BankingTools;
+import com.banking.ms_ai.Tools.AccountTools;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 public class OpenAIService {
 
     private final ChatClient chatClient;
-    private final BankingTools bankingTools;
+    private final AccountTools accountTools;
 
     public String chat(String message) {
         return chatClient
                 .prompt()
                 .user(message)
-                .tools(bankingTools)
+                .tools(accountTools)
                 .call()
                 .content();
     }

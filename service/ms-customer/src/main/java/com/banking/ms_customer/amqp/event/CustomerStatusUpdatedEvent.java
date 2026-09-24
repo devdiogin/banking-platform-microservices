@@ -6,6 +6,8 @@ import java.util.UUID;
 
 public record CustomerStatusUpdatedEvent(
         UUID id,
+        String name,
+        String email,
         String legalDocument,
         Status status)
 {}

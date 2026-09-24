@@ -22,6 +22,9 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
 
     private static final String FORM_EMAIL = "naoresponda@carraraodontologia.com.br";
+    private static final String GREETING = "{{saudacao}}";
+    private static final String NAME = "{{nome}}";
+    private static final String ACCOUNT_ANALYSIS = "Concluímos a análise da sua conta Spring Bank";
 
     private String greeting() {
 
@@ -35,7 +38,6 @@ public class EmailService {
         } else {
             messageHour = "Boa noite";
         }
-
         return messageHour;
     }
 
@@ -48,8 +50,8 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         String html = loadTemplate("customerCreated.html")
-                .replace("{{saudacao}}", messageHour)
-                .replace("{{nome}}", name);
+                .replace(GREETING, messageHour)
+                .replace(NAME, name);
 
         helper.setFrom(FORM_EMAIL);
         helper.setTo(to);
@@ -68,26 +70,39 @@ public class EmailService {
 
         if (event.status().equals(CustomerStatus.ACTIVE)) {
             String html = loadTemplate("CustomerApproved.html")
-                    .replace("{{saudacao}}", messageHour)
-                    .replace("{{nome}}", event.name());
+                    .replace(GREETING, messageHour)
+                    .replace(NAME, event.name());
 
             helper.setFrom(FORM_EMAIL);
             helper.setTo(event.email());
-            helper.setSubject("Concluímos a análise da sua conta Spring Bank");
+            helper.setSubject(ACCOUNT_ANALYSIS);
             helper.setText(html, true);
 
-        } else if (event.status().equals(CustomerStatus.REJECTED)) {
+        }
+
+        if (event.status().equals(CustomerStatus.REJECTED)) {
             String html = loadTemplate("CustomerRejected.html")
-                    .replace("{{saudacao}}", messageHour)
-                    .replace("{{nome}}", event.name());
+                    .replace(GREETING, messageHour)
+                    .replace(NAME, event.name());
 
             helper.setFrom(FORM_EMAIL);
             helper.setTo(event.email());
-            helper.setSubject("Concluímos a análise da sua conta Spring Bank");
+            helper.setSubject(ACCOUNT_ANALYSIS);
+            helper.setText(html, true);
+
+        }
+
+        if (event.status().equals(CustomerStatus.BLOCKED)) {
+            String html = loadTemplate("CustomerBlocked.html")
+                    .replace(GREETING, messageHour)
+                    .replace(NAME, event.name());
+
+            helper.setFrom(FORM_EMAIL);
+            helper.setTo(event.email());
+            helper.setSubject(ACCOUNT_ANALYSIS);
             helper.setText(html, true);
 
         } else {
-
             return;
         }
 

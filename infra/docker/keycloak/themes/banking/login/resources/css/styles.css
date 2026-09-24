@@ -690,3 +690,47 @@ a {
     }
 
 }
+/* SPRING BANK - LIGHT THEME */
+:root {
+    --background: #f5f5f7;
+    --surface: #ffffff;
+    --surface-hover: #fafafa;
+    --primary: #820ad1;
+    --primary-hover: #6f08b3;
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-muted: #86868b;
+    --border: #dedee3;
+    --border-focus: #820ad1;
+    --danger: #d92d20;
+    --card-radius: 28px;
+    --shadow: 0 24px 70px rgba(29, 29, 31, 0.10);
+}
+
+.spring-page { padding: 28px clamp(24px, 5vw, 72px) 24px; }
+.spring-logo { border-radius: 10px; box-shadow: 0 8px 22px rgba(130, 10, 209, 0.22); }
+.spring-layout { max-width: 1280px; grid-template-columns: minmax(390px, .88fr) minmax(460px, 1.12fr); gap: clamp(48px, 6vw, 96px); }
+.spring-auth-content { max-width: 480px; padding: clamp(32px, 4vw, 52px); border: 1px solid rgba(222, 222, 227, .85); border-radius: var(--card-radius); background: rgba(255, 255, 255, .94); box-shadow: var(--shadow); }
+.spring-page-title { margin-bottom: 34px; }
+.spring-page-title h1 { font-size: clamp(38px, 3.7vw, 52px); font-weight: 650; line-height: 1.02; letter-spacing: -2px; }
+.spring-page-title h1 span { color: var(--primary); }
+.spring-field input { background: #f8f8fa; }
+.spring-field input:hover { background: #fff; }
+.spring-field input:focus { box-shadow: 0 0 0 3px rgba(130, 10, 209, .12); }
+.spring-password-toggle:hover { background: #f7f2fa; }
+.spring-primary-button { box-shadow: 0 10px 24px rgba(130, 10, 209, .18); }
+.spring-primary-button:focus-visible { outline-color: rgba(130, 10, 209, .32); }
+.spring-alert-error { color: #b42318; border-color: #fecdca; background: #fef3f2; }
+.spring-visual { min-height: 620px; border-radius: 40px; background: linear-gradient(145deg, #820ad1 0%, #5b0794 100%); box-shadow: 0 30px 80px rgba(91, 7, 148, .20); }
+.spring-orbit { border-color: rgba(255, 255, 255, .32); }
+.spring-visual-brand { background: rgba(255, 255, 255, .15); border: 1px solid rgba(255, 255, 255, .25); backdrop-filter: blur(10px); box-shadow: 0 28px 70px rgba(45, 0, 72, .24); }
+.spring-visual-message { right: 40px; bottom: 38px; }
+.spring-visual-message span { color: rgba(255, 255, 255, .68); }
+.spring-visual-message p { color: #fff; }
+
+@media (max-width: 560px) {
+    .spring-page { padding: 24px 20px; }
+    .spring-header { margin-bottom: 32px; }
+    .spring-auth-content { padding: 30px 24px; border-radius: 22px; box-shadow: 0 16px 44px rgba(29, 29, 31, .08); }
+    .spring-page-title h1 { font-size: 38px; }
+}

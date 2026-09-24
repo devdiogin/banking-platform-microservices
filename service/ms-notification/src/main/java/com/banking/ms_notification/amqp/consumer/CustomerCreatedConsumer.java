@@ -18,7 +18,6 @@ public class CustomerCreatedConsumer {
 
     @RabbitListener(queues = NotificationRabbitConstants.CUSTOMER_CREATED_QUEUE)
     public void consume(CustomerCreatedEvent event) throws MessagingException, IOException {
-
         emailService.customerCreated(event.email(), event.name());
     }
 }
