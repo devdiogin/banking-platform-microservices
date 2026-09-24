@@ -5,7 +5,9 @@ import com.banking.ms_auth.exception.UserNotCreatedException;
 import com.banking.ms_auth.exception.UserNotFoundException;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
+import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,10 @@ public class KeycloakUserService {
             if (response.getStatus() != Response.Status.CREATED.getStatusCode()) {
                 throw new UserNotCreatedException("Erro ao criar usuário no Keycloak. Status: " + response.getStatus());
             }
+
+            var userId = CreatedResponseUtil.getCreatedId(response);
+
+            assignRole(userId, "CUSTOMER");
         }
     }
 
@@ -68,5 +74,22 @@ public class KeycloakUserService {
                 .get(user.getId());
         userResource.update(user);
         userResource.executeActionsEmail(List.of("VERIFY_EMAIL", "UPDATE_PASSWORD"));
+    }
+
+    private void assignRole(String userId, String roleName) {
+
+        RoleRepresentation role = keycloak
+                .realm(realm)
+                .roles()
+                .get(roleName)
+                .toRepresentation();
+
+        keycloak
+                .realm(realm)
+                .users()
+                .get(userId)
+                .roles()
+                .realmLevel()
+                .add(List.of(role));
     }
 }
