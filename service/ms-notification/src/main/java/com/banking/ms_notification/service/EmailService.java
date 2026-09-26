@@ -49,7 +49,7 @@ public class EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-        String html = loadTemplate("customerCreated.html")
+        String html = loadTemplate("CustomerCreated.html")
                 .replace(GREETING, messageHour)
                 .replace(NAME, name);
 

@@ -1,5 +1,6 @@
 services:
   postgres-customer:
+    container_name: postgres-customer
     image: postgres:17-alpine
 
     restart: unless-stopped
@@ -26,6 +27,7 @@ services:
       - banking-network
 
   postgres-account:
+    container_name: postgres-account
     image: postgres:17-alpine
 
     restart: unless-stopped

@@ -47,9 +47,6 @@ public class KeycloakUserService {
                 throw new UserNotCreatedException("Erro ao criar usuário no Keycloak. Status: " + response.getStatus());
             }
 
-            var userId = CreatedResponseUtil.getCreatedId(response);
-
-            assignRole(userId, "CUSTOMER");
         }
     }
 
@@ -74,22 +71,5 @@ public class KeycloakUserService {
                 .get(user.getId());
         userResource.update(user);
         userResource.executeActionsEmail(List.of("VERIFY_EMAIL", "UPDATE_PASSWORD"));
-    }
-
-    private void assignRole(String userId, String roleName) {
-
-        RoleRepresentation role = keycloak
-                .realm(realm)
-                .roles()
-                .get(roleName)
-                .toRepresentation();
-
-        keycloak
-                .realm(realm)
-                .users()
-                .get(userId)
-                .roles()
-                .realmLevel()
-                .add(List.of(role));
     }
 }

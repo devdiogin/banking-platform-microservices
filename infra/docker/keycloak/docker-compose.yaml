@@ -1,5 +1,6 @@
 services:
   keycloak:
+    container_name: keycloak
     image: quay.io/keycloak/keycloak:26.7.0
     restart: unless-stopped
 
@@ -31,6 +32,7 @@ services:
       - banking-network
 
   postgres-keycloak:
+    container_name: postgres-keycloak
     image: postgres:17-alpine
     restart: unless-stopped
 
